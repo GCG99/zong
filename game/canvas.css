@@ -1,0 +1,90 @@
+.but{
+	margin-top: 20px;
+	margin-left: 80px;
+	height: 60px;
+	width: 60px;
+	border-radius: 80px;
+	background-color: rgb(102,105,210);
+}
+p{
+	display: block;
+	float: right;
+	text-align: center;
+	width: 600px;
+}
+
+
+         /*    context.moveTo(584,254);
+         	   	context.lineTo(629,254);
+         	 	context.lineTo(629,150);
+         	 	context.lineTo(584,150);
+         
+         
+         	 	context.translate(x,y);
+         	    context.moveTo(-20,50);
+         	   	context.lineTo(20,50);
+         	 	context.lineTo(20,0);
+         	 	context.lineTo(-20,0);
+
+         	 	function bal(){
+
+	 		var contextl={x:100,y:100,vx:2,vy:0,g:0.1}	
+	 		setInterval(
+	         	function bal(){
+
+	         	context.clearRect(0,0,canvas.width,canvas.height);
+	         
+	         	if(contextl.y+contextl.vy>canvas.height-4){
+	       		contextl.vy=-contextl.vy*0.7;
+	        	 }
+	        	 if(contextl.x+contextl.vx>canvas.width-4||contextl.x+contextl.vx<4){
+	       		contextl.vx=-contextl.vx*0.7;
+	        	 }
+	         	contextl.x += contextl.vx;
+	         	contextl.y +=contextl.vy;
+	         	contextl.vy += contextl.g;
+	         	context.fillStyle="rgb(59,200,156)";
+	         	context.beginPath();
+	         	context.arc( contextl.x , contextl.y , 8 , 0 ,2*Math.PI , true );
+	         	context.closePath();
+	         	context.fill();
+	         	 },10);
+				if(contextl.vx<0.05){
+			     clearInterval(move);
+			}
+	}
+ 
+
+ 		context.beginPath();
+	    context.arc(canvas.width/2, canvas.height/2,50,0,2*Math.PI,false);
+	    context.stroke();
+	    context.fill();
+	    context.fillRect(584,234,100,40);
+	 	context.strokeStyle="black"
+	 	context.fillStyle="black"
+	 	context.fill();
+	 	context.stroke();
+
+	 	
+
+         	 	 var contextl={x:100,y:100,vx:2,vy:0,g:0.1}	
+	 	setInterval(
+	         function bal(){
+
+	         	 context.clearRect(0,0,canvas.width,canvas.height);
+	         
+	         if(contextl.y+contextl.vy>canvas.height-4){
+	       		contextl.vy=-contextl.vy*0.7;
+	         }
+	         if(contextl.x+contextl.vx>canvas.width-4||contextl.x+contextl.vx<4){
+	       		contextl.vx=-contextl.vx*0.7;
+	         }
+	         contextl.x += contextl.vx;
+	         contextl.y +=contextl.vy;
+	         contextl.vy += contextl.g;
+	         context.fillStyle="rgb(59,200,156)";
+	         context.beginPath();
+	         context.arc( contextl.x , contextl.y , 8 , 0 ,2*Math.PI , true );
+	         context.closePath();
+	         context.fill();
+	          },1);*/ 

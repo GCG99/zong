@@ -1,0 +1,31 @@
+.container{
+	width: 335px;
+	height: 500px;
+	margin:0px auto;
+	border:4px solid rgb(3,159,230);
+	border-radius: 8px;
+	background-image: url(./timgg.jpg);
+	background-position: 100px -100px;
+	background-size: cover;
+}
+.val{
+	width:311px;
+	height:100px;
+    text-align: right;
+    border:2px solid rgb(44,44,44);
+    margin-top: 10px;
+    border-radius: 18px;
+    font-size: 80px;     
+    margin-left: 10px;
+}
+.button{
+	opacity:0.8;
+    filter:alpha(opacity=80); 
+	width: 20%;
+	height: 50px;
+	float: left;
+	border-radius: 120px;
+	font-size: 20px;
+	margin-left: 4%;
+	margin-top: 3%;
+}

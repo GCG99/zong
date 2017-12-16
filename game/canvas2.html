@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./canvas.css">
+</head>
+<body>
+	<div class="cBox">	
+		<canvas id="canvas" style="border: 1px solid gray ;display: block;">
+			当前浏览器不支持canvas
+		</canvas>
+		</div>
+	<button id="contral1" class="but" onclick="left()">向左</button>
+	<button id="contral2" class="but"  onclick="right()">向右</button>
+	<button id="ballc" class="but"  onclick="addBalls()">小球</button>
+	<button id="good"  class="but" onclick="creategood()">小块</button>
+	<p>也可使用键盘<br>↑小块 ↓小球</p>
+
+<script>
+		var canvas=document.getElementById("canvas");
+		canvas.width=1216;
+		canvas.height=508;
+		if(canvas.getContext("2d"))
+		{
+		var context=canvas.getContext("2d")
+		}
+		else{
+		alert("当前浏览器不支持canvas")
+		}
+
+		var w=0;
+		var balls = [];
+		var v=140;
+		var god={
+			y:10,
+			x:-10,
+		}
+		var goy=[10,20,30,40,50,60,70,80,90,100,110,120,330,340,350,360,370,380,390,400,410,420,430,440,];
+		var op=false;
+		var score=0;
+		var ty=false;
+
+		window.onload = function(){
+
+			draw(w);
+
+			update();
+
+			var ip=setInterval(
+				function(){
+					if(ty){
+				 context.clearRect(0,0,canvas.width, canvas.height);
+				 draw(0);
+				 clearInterval(ip);}
+		},50)
+	}
+
+		document.onkeydown = function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==37){ 
+            	left();
+              }
+            if(e && e.keyCode==39){
+            	right(); 
+               }            
+            if(e && e.keyCode==38){
+            	creategood();
+               }
+            if(e && e.keyCode==40){
+            	addBalls();
+               }      
+        }; 
+
+
+		function update(){
+
+			var io=setInterval(
+				function(){
+					updateBalls();
+					for( var i = 0 ; i < balls.length ; i ++ ){
+					if( balls[i].x<=(god.x+60) && balls[i].x>=(god.x-10) && balls[i].y<=(god.y+60) && balls[i].y>=(god.y-10)){
+						score=score+1;
+					creategood();
+						}
+					}
+					if(god.x>1210){
+						alert("Your score is "+score);
+						ty=true;
+						clearInterval(io);
+					}
+					if(op){updategood();}
+				},50)
+			}
+
+		function left(){
+
+			w=w-1;
+		}
+
+		function right(){
+
+			w=w+1;
+		}
+
+	 	function draw(w){
+	 		context.beginPath();
+			context.arc(canvas.width/2, canvas.height/2,50,0,2*Math.PI,false);
+	    	context.strokeStyle="black";
+	 		context.fillStyle="black";
+	 		context.stroke();
+	    	context.fill();
+	 		context.closePath();
+
+            var inx = canvas.width/2; 
+            var iny = canvas.height/2;
+            context.clearRect(0,0,canvas.width, canvas.height);
+            context.save();
+    		context.translate(inx,iny);
+    		context.rotate(w*10*Math.PI/180);
+   			context.strokeStyle="black"
+	 		context.fillStyle="black"
+	 		context.fillRect(0,-20,100,40);
+	 		context.fill();
+	 		context.stroke();
+    		context.restore();
+
+        }
+
+ 
+		function addBalls(){
+
+    		var aBall = {
+    			x:canvas.width/2+100*Math.cos(w/6*Math.PI),
+    			y:canvas.height/2+100*Math.sin(w/6*Math.PI),
+    			vx:v*Math.cos(w/6*Math.PI),
+    			vy:v*Math.sin(w/6*Math.PI),
+    			g:0.8,
+         	}
+
+       balls.push( aBall )
+
+		}
+
+		function updateBalls(){
+
+			context.clearRect(0,0,canvas.width,canvas.height);
+
+			draw(w);
+			
+        	for( var i = 0 ; i < balls.length ; i ++ ){
+        		context.strokeStyle="rgb(59,200,156)";
+        		context.fillStyle="rgb(59,200,156)";
+	       	 	context.beginPath();
+	       		context.arc( balls[i].x , balls[i].y , 8 , 0 ,2*Math.PI , true );
+	        	context.closePath();
+	        	context.fill();
+	        
+        				}
+
+   			for( var i = 0 ; i < balls.length ; i ++ ){
+
+        		balls[i].x += balls[i].vx;
+       		 	balls[i].y += balls[i].vy;
+        		balls[i].vy += balls[i].g;
+
+        		if( balls[i].vy >= canvas.height-4 ){
+           			balls[i].vy = - balls[i].vy*0.75;
+       					 }
+
+   				if(balls[i].y+balls[i].vy>canvas.height-4){
+	       			balls[i].vy=-balls[i].vy*0.7;
+	        			 }
+				if(balls[i].x+balls[i].vx>canvas.width-4||balls[i].x+balls[i].vx<4){
+	       			balls[i].vx=-balls[i].vx*0.7;
+	        			 }
+	        	if(balls[i].vy<=0.05){
+	        		balls[i].vy=0;}
+	        }
+
+   var cnt = 0
+    for( var i = 0 ; i < balls.length ; i ++ )
+        if( Math.pow(balls[i].vx,2)+Math.pow(balls[i].vy,2)>5){
+            balls[cnt++] = balls[i];
+        }
+
+    while( balls.length > cnt ){
+        balls.pop();
+    }
+
+		}
+
+	function creategood(){
+		op=true;
+
+		god={
+			x:-10,
+			y:goy[Math.ceil( Math.random()*goy.length )],
+		}
+
+		}
+
+
+	function updategood(){
+
+		context.clearRect(0,0,canvas.width,canvas.height);
+
+		draw(w);
+		updateBalls();
+
+		god.x = god.x+10;
+		context.fillStyle="black";
+		context.fillRect(god.x,god.y,50,50);
+		context.stroke();
+
+	}
+
+
+</script>	
+</body>
+</html>
